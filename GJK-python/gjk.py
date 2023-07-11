@@ -30,7 +30,7 @@ def supportPoly(polygon, direction):
     bestPoint = polygon[0]
     bestDot = dot(bestPoint, direction)
 
-    for i in xrange(1, len(polygon)):
+    for i in range(1, len(polygon)):
         p = polygon[i]
         d = dot(p, direction)
 
@@ -60,7 +60,7 @@ def collide(shape1, shape2, support1, support2):
     simplex = [s]
     d = list(neg(s))
 
-    for i in xrange(100):
+    for i in range(100):
         a = support(shape1, shape2, support1, support2, d)
 
         if dot(a, d) < 0:
@@ -71,7 +71,7 @@ def collide(shape1, shape2, support1, support2):
         if doSimplex(simplex, d):
             return True
 
-    raise RuntimeError, "infinite loop in GJK algorithm"
+    raise RuntimeError('infinite loop in GJK algorithm')
 
 def doSimplex(simplex, d):
     l = len(simplex)

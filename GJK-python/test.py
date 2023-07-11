@@ -74,7 +74,7 @@ def makePolyFromMouse():
     )
 
 def pairs(points):
-    for i, j in enumerate(xrange(-1, len(points) - 1)):
+    for i, j in enumerate(range(-1, len(points) - 1)):
         yield (points[i], points[j])
 
 def circles(cs, color=BLACK, camera=(0, 0)):
