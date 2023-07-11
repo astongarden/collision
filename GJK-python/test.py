@@ -51,8 +51,8 @@ def run():
         SCREEN.fill(WHITE)
         poly2 = makePolyFromMouse()
 
-        #collide = gjk.collidePolyPoly(poly2, poly1)
-        #polygon(poly1)
+        # collide = gjk.collidePolyPoly(poly2, poly1)
+        # polygon(poly1)
 
         collide = gjk.collidePolyCircle(poly2, circle1)
         circle(circle1)
