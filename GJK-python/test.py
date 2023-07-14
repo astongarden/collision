@@ -67,11 +67,9 @@ def makePolyFromMouse():
 
     return (
         ( 50 + pos[0],  50 + pos[1]),
-        ( 50 + pos[0], -15 + pos[1]),
-        ( 40 + pos[0], -30 + pos[1]),
-        ( 20 + pos[0], -50 + pos[1]),
-        (  0 + pos[0], -50 + pos[1]),
-        (-60 + pos[0],   0 + pos[1])
+        ( 50 + pos[0], -50 + pos[1]),
+        ( -50 + pos[0], 50 + pos[1]),
+        ( -50 + pos[0], -50 + pos[1]),
     )
 
 def pairs(points):
