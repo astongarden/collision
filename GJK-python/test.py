@@ -64,7 +64,6 @@ def run():
 
 def makePolyFromMouse():
     pos = pygame.mouse.get_pos()
-
     return (
         ( 50 + pos[0],  50 + pos[1]),
         ( -50 + pos[0], 50 + pos[1]),
