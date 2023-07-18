@@ -1,15 +1,9 @@
-#!/usr/bin/python
-
-"""
-Pygame script to test that the algorithm works.
-"""
-
 import sys
-
 import pygame
 from pygame.locals import *
-
 import gjk
+import math
+import numpy as np
 
 pygame.init()
 SCREEN = pygame.display.set_mode((800, 600))
@@ -21,15 +15,32 @@ BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 
+robot_link1 = 200
+robot_link2 = 200
+robot_thickness = 40
+
+q1 = 0
+q2 = 1
+
+
 def run():
 
-    poly1 = (
-    ( 00 + 400,  50 + 300),
-    (-50 + 400,  50 + 300),
-    (-50 + 400,   0 + 300)
+
+    link_1 = (
+    (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
+    (-robot_thickness*math.sin(q1),robot_thickness*math.cos(q1)),
+    (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
+    (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
     )
 
-    circle1 = ((400, 300), 100)
+    link_2 = (
+    (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
+    (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
+    (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)+robot_link2*math.sin(q2)),
+    (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
+    )
+
+    circle1 = ((100, 10), 20)
 
     while True:
         for event in pygame.event.get():
@@ -50,26 +61,22 @@ def run():
 
 
         SCREEN.fill(WHITE)
-        poly2 = makePolyFromMouse()
 
-        collide = gjk.collidePolyPoly(poly2, poly1)
-        polygon(poly1)
+        collide_1 = gjk.collidePolyCircle(link_1, circle1)
+        polygon(link_1)
+        circle(circle1)
+        collide_2 = gjk.collidePolyCircle(link_2, circle1)
+        polygon(link_2)
+        circle(circle1)
 
-        # collide = gjk.collidePolyCircle(poly2, circle1)
-        # circle(circle1)
+        print('True' if collide_1 else 'fail', 'True' if collide_2 else 'fail')
+ 
 
-        polygon(poly2, GREEN if collide else RED)
         pygame.display.flip()
-        CLOCK.tick(60)
+        pygame.display.flip()
 
-def makePolyFromMouse():
-    pos = pygame.mouse.get_pos()
-    return (
-        ( 50 + pos[0],  50 + pos[1]),
-        ( -50 + pos[0], 50 + pos[1]),
-        ( -50 + pos[0], -50 + pos[1]),
-        ( 50 + pos[0], -50 + pos[1]),
-    )
+        CLOCK.tick(3)
+
 
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):
@@ -94,3 +101,6 @@ def add(p1, p2):
 
 if __name__ == '__main__':
     run()
+
+
+
