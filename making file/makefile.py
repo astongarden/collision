@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+import matplotlib.patches as patches
 
 # 로봇 정보
 robot_length_1 = 1.0    # 로봇 link1 길이
@@ -12,11 +13,14 @@ joint_limits = [[-np.pi, np.pi], [-np.pi, np.pi]]  # 관절 각도 제한
 joint_angle1 = float(input("Enter joint angle 1(deg): "))
 joint_angle2 = float(input("Enter joint angle 2(deg): "))
 
+# 랜덤 장애물 생성
+obstacle_x = np.random.uniform(0, 1)
+obstacle_y = np.random.uniform(0, 1)
+obstacle_width = np.random.uniform(0.2, 0.5)
+obstacle_height = np.random.uniform(0.2, 0.5)
 
-def draw_rectangle(x, y, width, height, color):
-    plt.gca().add_patch(Rectangle((x, y), width, height, linewidth=robot_thickness, edgecolor=color, facecolor='none'))
 
-# 워크스페이스 그래프 생성
+# 워크스페이스 그리기
 def plot_workspace(robot_angles):
 
     robot_angles = np.deg2rad(robot_angles)
@@ -26,6 +30,11 @@ def plot_workspace(robot_angles):
     y1 = robot_length_1 * np.sin(robot_angles[0])
     x2 = x1 + robot_length_2 * np.cos(robot_angles[0] + robot_angles[1])
     y2 = y1 + robot_length_2 * np.sin(robot_angles[0] + robot_angles[1])
+
+    # 장애물 그리기
+    fig, ax = plt.subplots()
+    rect = patches.Rectangle((obstacle_x, obstacle_y), obstacle_width, obstacle_height, edgecolor='black', facecolor='yellow', fill=True)
+    ax.add_patch(rect)
 
     # 그래프 그리기
     plt.plot([0, x1, x2], [0, y1, y2], 'k-')
@@ -41,6 +50,10 @@ def plot_workspace(robot_angles):
     plt.axis('equal')
     plt.show()
 
+    # 로봇팔 위치 그리기
+robot_angles = [joint_angle1, joint_angle2]
+plot_workspace(robot_angles)
+    
 # C-space 그래프 생성
 def plot_cspace():
     # 각도 범위
@@ -61,23 +74,15 @@ def predict_collision(robot_angles):
     # 여기에서는 단순히 무작위로 충돌 여부를 예측하는 것으로 가정
     return bool(np.random.randint(0, 2))
 
-# 로봇팔 위치 그리기
-robot_angles = [joint_angle1, joint_angle2]
-plot_workspace(robot_angles)
 
 # C-space 그래프 그리기
 plot_cspace()
 
-# # 장애물 생성 및 충돌 여부 예측
-# obstacle_x = np.random.uniform(-1, 1)
-# obstacle_y = np.random.uniform(-1, 1)
-# obstacle_width = np.random.uniform(0.2, 0.5)
-# obstacle_height = np.random.uniform(0.2, 0.5)
 
-# collision = False
-# if obstacle_x <= robot_length_1 * np.cos(joint_angle1) + robot_length_2 * np.cos(joint_angle1 + joint_angle2) and \
-#    obstacle_y <= robot_length_1 * np.sin(joint_angle1) + robot_length_2 * np.sin(joint_angle1 + joint_angle2):
-#     collision = True
+collision = False
+if obstacle_x <= robot_length_1 * np.cos(joint_angle1) + robot_length_2 * np.cos(joint_angle1 + joint_angle2) and \
+   obstacle_y <= robot_length_1 * np.sin(joint_angle1) + robot_length_2 * np.sin(joint_angle1 + joint_angle2):
+    collision = True
 
-# # 예측 결과 출력
-# print("Collision Prediction: ", collision)
+# 예측 결과 출력
+print("Collision Prediction: ", collision)
