@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 
 # 로봇 정보
-robot_length_1 = 1.0    # 로봇 길이 (팔 길이 등)
-robot_length_2 = 1.0    # 로봇 길이 (팔 길이 등)
-robot_thickness = 0.2
+robot_length_1 = 1.0    # 로봇 link1 길이
+robot_length_2 = 1.0    # 로봇 link2 길이
+robot_thickness = 0.2   # 로봇 link 두께
 joint_limits = [[-np.pi, np.pi], [-np.pi, np.pi]]  # 관절 각도 제한
 
-# 로봇팔 관절 각도 입력 받기
+# 로봇팔 관절 각도 입력
 joint_angle1 = float(input("Enter joint angle 1(deg): "))
 joint_angle2 = float(input("Enter joint angle 2(deg): "))
 
