@@ -17,10 +17,10 @@ RED   = (255,   0,   0)
 
 robot_link1 = 200
 robot_link2 = 200
-robot_thickness = 40
+robot_thickness = 20
 
 q1 = 0
-q2 = 1
+q2 = 0
 
 
 def run():
@@ -40,7 +40,7 @@ def run():
     (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
     )
 
-    circle1 = ((100, 10), 20)
+    circle1 = ((100, 100), 20)
 
     while True:
         for event in pygame.event.get():
@@ -69,13 +69,11 @@ def run():
         polygon(link_2)
         circle(circle1)
 
-        print('True' if collide_1 else 'fail', 'True' if collide_2 else 'fail')
- 
+        print('True' if (collide_1 or collide_2) else 'fail')
 
         pygame.display.flip()
-        pygame.display.flip()
 
-        CLOCK.tick(3)
+        CLOCK.tick(1)
 
 
 def pairs(points):
