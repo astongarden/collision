@@ -13,6 +13,8 @@ joint_limits = [[-np.pi, np.pi], [-np.pi, np.pi]]  # 관절 각도 제한
 joint_angle1 = float(input("Enter joint angle 1(deg): "))
 joint_angle2 = float(input("Enter joint angle 2(deg): "))
 
+robot_angles = [joint_angle1, joint_angle2]
+
 # 랜덤 장애물 생성
 obstacle_x = np.random.uniform(0, 1)
 obstacle_y = np.random.uniform(0, 1)
@@ -24,7 +26,7 @@ obstacle_height = np.random.uniform(0.2, 0.5)
 def plot_workspace(robot_angles):
 
     robot_angles = np.deg2rad(robot_angles)
-    
+
     # 로봇팔 위치 계산
     x1 = robot_length_1 * np.cos(robot_angles[0])
     y1 = robot_length_1 * np.sin(robot_angles[0])
@@ -50,39 +52,29 @@ def plot_workspace(robot_angles):
     plt.axis('equal')
     plt.show()
 
-    # 로봇팔 위치 그리기
-robot_angles = [joint_angle1, joint_angle2]
+# 로봇팔 위치 그리기
 plot_workspace(robot_angles)
-    
-# C-space 그래프 생성
-def plot_cspace():
-    # 각도 범위
-    theta1 = np.linspace(joint_limits[0][0], joint_limits[0][1], 100)
-    theta2 = np.linspace(joint_limits[1][0], joint_limits[1][1], 100)
-    theta1, theta2 = np.meshgrid(theta1, theta2)
 
-    # 그래프 그리기
-    plt.contourf(theta1, theta2, np.zeros_like(theta1), cmap='gray')
-    plt.xlabel('Joint 1 Angle')
-    plt.ylabel('Joint 2 Angle')
-    plt.title('C-space')
-    plt.grid(True)
-    plt.show()
+# # C-space 그래프 생성
+# def plot_cspace():
+#     # 각도 범위
+#     theta1 = np.linspace(joint_limits[0][0], joint_limits[0][1], 100)
+#     theta2 = np.linspace(joint_limits[1][0], joint_limits[1][1], 100)
+#     theta1, theta2 = np.meshgrid(theta1, theta2)
 
-# 충돌 여부 예측
-def predict_collision(robot_angles):
-    # 여기에서는 단순히 무작위로 충돌 여부를 예측하는 것으로 가정
-    return bool(np.random.randint(0, 2))
+#     # 그래프 그리기
+#     plt.contourf(theta1, theta2, np.zeros_like(theta1), cmap='gray')
+#     plt.xlabel('Joint 1 Angle')
+#     plt.ylabel('Joint 2 Angle')
+#     plt.title('C-space')
+#     plt.grid(True)
+#     plt.show()
 
-
-# C-space 그래프 그리기
-plot_cspace()
+# # 충돌 여부 예측
+# def predict_collision(robot_angles):
+#     # 여기에서는 단순히 무작위로 충돌 여부를 예측하는 것으로 가정
+#     return bool(np.random.randint(0, 2))
 
 
-collision = False
-if obstacle_x <= robot_length_1 * np.cos(joint_angle1) + robot_length_2 * np.cos(joint_angle1 + joint_angle2) and \
-   obstacle_y <= robot_length_1 * np.sin(joint_angle1) + robot_length_2 * np.sin(joint_angle1 + joint_angle2):
-    collision = True
-
-# 예측 결과 출력
-print("Collision Prediction: ", collision)
+# # C-space 그래프 그리기
+# plot_cspace()
