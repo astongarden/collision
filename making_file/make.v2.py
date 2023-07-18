@@ -17,22 +17,26 @@ RED   = (255,   0,   0)
 robot_link1 = 200
 robot_link2 = 200
 robot_thickness = 20
+# q1 = 0
+# q2 = 2
 
+   
 
-q1 = 0
-q2 = 1
 
 def run():
+    for q1 in range(-math.pi, math.pi):
+        for q2 in range(-math.pi, math.pi):
+     
 
 
-    link_1 = (
+        link_1 = (
     (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
     (-robot_thickness*math.sin(q1),robot_thickness*math.cos(q1)),
     (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
     (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
     )
 
-    link_2 = (
+        link_2 = (
     (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
     (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
     (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)+robot_link2*math.sin(q2)),
@@ -106,12 +110,12 @@ def add(p1, p2):
 if __name__ == '__main__':
     run()
 
-input = 
-output = 
+input = "fds"
+output = "asdf"
 
-data = input + "\n" + output
+data = "input : " + input + "   collision result : " + output + "\n"
 
-file_path = "result.txt"
+file_path = "/home/jeongil/collision/making_file/result.txt"
 
 with open(file_path, "w") as file:
     file.write(data)
