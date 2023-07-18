@@ -1,1 +1,1 @@
-input : fds   collision result : asdf
+q1 : 0  q2 : 2  collision resutl : fail
