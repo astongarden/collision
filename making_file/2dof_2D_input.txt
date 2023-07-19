@@ -1,0 +1,4 @@
+robot_link1 : 150
+robot_link2 : 100
+robot_thickness : 20
+obstacle : ((93.52110008404622, -99.85928190743994), 26.134146778195827)

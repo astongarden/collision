@@ -17,11 +17,23 @@ RED   = (255,   0,   0)
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
-obstacle = ((-100, 100), 30)
+# obstacle : create a random circle
+obstacle = ((np.random.uniform(-100, 100), np.random.uniform(-100, 100)), np.random.uniform(10, 50))
 
 # calculate collision 
 def run():
     start = time.time()
+
+    file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+    file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+    file_path = "/home/jeongil/collision/making_file/2dof_2D_input.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+
 
     for q1_rad in range(0, 360):
         for q2_rad in range(0, 360):
