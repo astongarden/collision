@@ -19,10 +19,11 @@ robot_link2 = 100
 robot_thickness = 20
 # obstacle : create a random circle
 obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
+# obstacle : create a random poly
 
 
 # calculate collision 
-def run():
+def run_circle():
     start = time.time()
 
     # 기존 txt 파일 내용 삭제
@@ -58,14 +59,79 @@ def run():
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
                 )
             
-            # collision check
+            # collision check with circle obstacle
 
             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
-            polygon(link_1)
             circle(obstacle)
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
-            polygon(link_2)
-            circle(obstacle)
+            circle(obstacle)           
+
+            # save result in txt file and  recalculate
+
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+            if (collide_1 or collide_2):
+                with open(file_path, "a") as file:
+                    file.write(f"collision  q1 : {q1_rad}   q2 : {q2_rad}\n")
+                
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
+            with open(file_path, "a") as file:          
+                file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
+
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
+    with open(file_path, "a") as file:          
+        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
+
+    end = time.time()
+
+    #check time and print, save in txt file
+    print(f"{end - start :.5f} sec")
+
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+    with open(file_path, "a") as file:
+        file.write(f"\ncalculate time is : {end - start :.5f} sec")
+
+def run_poly():
+    start = time.time()
+
+    # 기존 txt 파일 내용 삭제
+
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
+
+
+    for q1_rad in range(0, 360):
+        for q2_rad in range(0, 360):
+            
+            q1 = math.radians(q1_rad) 
+            q2 = math.radians(q2_rad) 
+
+            link_1 = (
+                (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
+                (-robot_thickness*math.sin(q1),robot_thickness*math.cos(q1)),
+                (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
+                (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
+                )
+
+            link_2 = (
+                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
+                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
+                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)+robot_link2*math.sin(q2)),
+                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
+                )
+            
+            # collision check with poly obstacle
+
+            collide_1 = gjk.collidePolyPoly(link_1, obstacle)
+            polygon(obstacle)
+            collide_2 = gjk.collidePolyPoly(link_2, obstacle)
+            polygon(obstacle)
 
             # save result in txt file and  recalculate
 
@@ -155,6 +221,8 @@ def add(p1, p2):
 
 # run code 
 if __name__ == '__main__':
-    run()
+    run_circle()
+
+
     C_space()
 
