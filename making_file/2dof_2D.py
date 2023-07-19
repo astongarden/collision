@@ -2,7 +2,8 @@ import gjk
 import math
 import time
 import numpy as np
-from matplotlib import pyplot as plt, patches
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
 
 # color
 
@@ -17,12 +18,10 @@ RED   = (255,   0,   0)
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
-# obstacle : create a random circle
-obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
-# obstacle : create a random poly
 
+obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
-# calculate collision 
+# calculate collision with circle obstacle
 def run_circle():
     start = time.time()
 
@@ -90,7 +89,8 @@ def run_circle():
     with open(file_path, "a") as file:
         file.write(f"\ncalculate time is : {end - start :.5f} sec")
 
-def run_poly():
+# calculate collision with rectangle obstacle
+def run_rectangle():
     start = time.time()
 
     # 기존 txt 파일 내용 삭제
@@ -221,8 +221,23 @@ def add(p1, p2):
 
 # run code 
 if __name__ == '__main__':
-    run_circle()
-
+    if obstacle == 1:
+        obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
+        run_circle()
+    else:
+        x = np.random.randint(-100, 100)
+        y = np.random.randint(-100, 100)
+        h = np.random.randint(10, 80)
+        w = np.random.randint(10, 80)
+        obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w))
+        run_rectangle()
+        fig, ax = plt.subplots()
+        obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
+        ax.add_patch(obstacle)
+        ax.set_xlim(-150, 150)
+        ax.set_ylim(-150, 150)
+        plt.show()
+        
 
     C_space()
 
