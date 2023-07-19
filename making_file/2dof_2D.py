@@ -1,4 +1,3 @@
-import sys
 import gjk
 import math
 import matplotlib.patches as patches
@@ -21,7 +20,7 @@ robot_link2 = 200
 robot_thickness = 20
 
 # obstacle information(circle)((x,y), radius)
-obstacle = ((100, 150), 20)
+obstacle = ((100, 200), 20)
 
 # calculate collision 
 def run():
@@ -81,6 +80,10 @@ def run():
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
+    file_path = "/home/jeongil/collision/making_file/2dof_2D_input.txt"
+    with open(file_path, "a") as file:          
+        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
+
     end = time.time()
 
     #check time and print, save in txt file
@@ -90,8 +93,9 @@ def run():
     with open(file_path, "a") as file:
         file.write(f"\ncalculation time is : {end - start :.5f} sec")
 
-# make a C_space graph
+# make a C_space graph and save
 def C_space():
+
     file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
 
     x_values = []
@@ -121,9 +125,11 @@ def C_space():
 
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
-
     plt.title("C-space")
+
+    plt.savefig('/home/jeongil/collision/making_file/2dof_2D_C-space.png')
     plt.show()
+
 
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):
