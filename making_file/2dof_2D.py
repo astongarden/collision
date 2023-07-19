@@ -3,7 +3,7 @@ import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle, Circle
 
 # color
 
@@ -222,22 +222,35 @@ def add(p1, p2):
 # run code 
 if __name__ == '__main__':
     if obstacle == 1:
-        obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
+        x = np.random.randint(-100, 100)
+        y = np.random.randint(-100, 100)
+        radius = np.random.randint(10, 50)
+        obstacle = ((x, y), radius)
         run_circle()
+
+        # circle show
+        # fig, ax = plt.subplots()
+        # obstacle = Circle((x, y),radius, facecolor='red', alpha=0.5)
+        # ax.add_patch(obstacle)
+        # ax.set_xlim(-300, 300)
+        # ax.set_ylim(-300, 300)
+        # plt.show()
+
     else:
         x = np.random.randint(-100, 100)
         y = np.random.randint(-100, 100)
         h = np.random.randint(10, 80)
         w = np.random.randint(10, 80)
-        obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w))
+        obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w), (x, y))
         run_rectangle()
-        fig, ax = plt.subplots()
-        obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
-        ax.add_patch(obstacle)
-        ax.set_xlim(-150, 150)
-        ax.set_ylim(-150, 150)
-        plt.show()
-        
 
+        # # Rectangle show
+        # fig, ax = plt.subplots()
+        # obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
+        # ax.add_patch(obstacle)
+        # ax.set_xlim(-300, 300)
+        # ax.set_ylim(-300, 300)
+        # plt.show()
+        
     C_space()
 
