@@ -20,19 +20,20 @@ robot_thickness = 20
 # obstacle : create a random circle
 obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
 
+
 # calculate collision 
 def run():
     start = time.time()
 
     # 기존 txt 파일 내용 삭제
 
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_input.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
 
@@ -66,31 +67,18 @@ def run():
             polygon(link_2)
             circle(obstacle)
 
-
-            # # make graph to see robot arm and obstacle
-            # fig, ax = plt.subplots()
-            # link1_patch = patches.Polygon(link_1, edgecolor='blue', facecolor='blue')
-            # ax.add_patch(link1_patch)       
-            # link2_patch = patches.Polygon(link_2, edgecolor='red', facecolor='red')
-            # ax.add_patch(link2_patch)
-            # obstacle_patch = patches.Circle(obstacle[0], obstacle[1], edgecolor='black', facecolor='black')
-            # ax.add_patch(obstacle_patch)
-            # ax.set_xlim(-400, 400)
-            # ax.set_ylim(-400, 400)
-            # plt.show()
-
             # save result in txt file and  recalculate
 
-            file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
                     file.write(f"collision  q1 : {q1_rad}   q2 : {q2_rad}\n")
                 
-            file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_input.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "a") as file:          
         file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
 
@@ -99,14 +87,14 @@ def run():
     #check time and print, save in txt file
     print(f"{end - start :.5f} sec")
 
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "a") as file:
         file.write(f"\ncalculate time is : {end - start :.5f} sec")
 
 # make a C_space graph and save
 def C_space():
 
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
 
     x_values = []
     y_values = []
@@ -137,7 +125,7 @@ def C_space():
     plt.ylabel("joint 2 angle(q2, degrees)")
     plt.title("C-space")
 
-    plt.savefig('/home/jeongil/collision/making_file/2dof_2D_C-space.png')
+    plt.savefig('/home/jeongil/collision/making_file/result/2dof_2D_C-space.png')
     plt.show()
 
 
