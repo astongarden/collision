@@ -88,6 +88,8 @@ def run():
 
     end = time.time()
 
+    #check time and print, save in txt file
+    
     print(f"{end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
