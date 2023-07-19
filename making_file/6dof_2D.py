@@ -1,9 +1,8 @@
-import sys
 import gjk
 import math
-import matplotlib.patches as patches
-import matplotlib.pyplot as plt
 import time
+import numpy as np
+from matplotlib import pyplot as plt, patches
 
 # color
 
