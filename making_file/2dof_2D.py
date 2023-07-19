@@ -4,6 +4,8 @@ import math
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 import time
+import graph_heatmap
+import numpy as np
 
 # color
 
@@ -44,7 +46,7 @@ def run():
             
 
             # obstacle information(circle)((x,y), radius)
-            obstacle = ((150, 300), 30)
+            obstacle = ((200, 150), 20)
 
             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
             polygon(link_1)
@@ -55,58 +57,37 @@ def run():
 
 
             # # make graph to see robot arm and obstacle
-
             # fig, ax = plt.subplots()
-
             # link1_patch = patches.Polygon(link_1, edgecolor='blue', facecolor='blue')
-            # ax.add_patch(link1_patch)
-            
+            # ax.add_patch(link1_patch)       
             # link2_patch = patches.Polygon(link_2, edgecolor='red', facecolor='red')
             # ax.add_patch(link2_patch)
-
             # obstacle_patch = patches.Circle(obstacle[0], obstacle[1], edgecolor='black', facecolor='black')
             # ax.add_patch(obstacle_patch)
-
             # ax.set_xlim(-400, 400)
             # ax.set_ylim(-400, 400)
-            
             # plt.show()
 
 
-            # # print result
-
-            # print('True' if (collide_1 or collide_2) else 'fail')
-
             # save result to txt file continue
-
-            file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
-            with open(file_path, "a") as file:          
-                file.write(f"q1 : {q1_rad} , q2 : {q2_rad} , collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
 
             file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
                     file.write(f"collision  q1 : {q1_rad}   q2 : {q2_rad}\n")
-
+                
+            file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
+            with open(file_path, "a") as file:          
+                file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
     end = time.time()
 
-
     #check time and print, save in txt file
-    
     print(f"{end - start :.5f} sec")
-
-    file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
-    with open(file_path, "a") as file:
-        file.write(f"\ncalculation time is : {end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
     with open(file_path, "a") as file:
         file.write(f"\ncalculation time is : {end - start :.5f} sec")
-
-
-    
-
 
 
 def pairs(points):
@@ -130,11 +111,8 @@ def line(start, end, color=BLACK, camera=(0, 0)):
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
-
-
 # run code 
 
 if __name__ == '__main__':
     run()
-
 

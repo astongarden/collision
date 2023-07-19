@@ -26,12 +26,12 @@ tk = 20
 def run():
     start = time.time()
 
-    for q1_rad in range(0, 360, 30):
-        for q2_rad in range(0, 360, 30):
-            for q3_rad in range(0, 360, 30):
-                for q4_rad in range(0, 360, 30):
-                    for q5_rad in range(0, 360, 30):     
-                        for q6_rad in range(0, 360, 30):
+    for q1_rad in range(0, 360, 20):
+        for q2_rad in range(0, 360, 20):
+            for q3_rad in range(0, 360, 20):
+                for q4_rad in range(0, 360, 20):
+                    for q5_rad in range(0, 360, 20):     
+                        for q6_rad in range(0, 360, 20):
 
             
                             q1 = math.radians(q1_rad) 
@@ -81,7 +81,7 @@ def run():
 
 
 
-                            obstacle = ((300, 300), 20)
+                            obstacle = ((300, 600), 20)
 
                             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
                             polygon(link_1)
@@ -123,7 +123,7 @@ def run():
 
                             # # print result
 
-                            # print('True' if (collide_1 or collide_2) else 'fail')
+                            # print('True' if (collide_1 or collide_2 or collide_3 or collide_4 or collide_5 or collide_6) else 'fail')
 
                             # save result to txt file continue
 
@@ -132,13 +132,7 @@ def run():
                             if (collide_1 or collide_2 or collide_3 or collide_4 or collide_5 or collide_6):
 
                                 with open(file_path, "a") as file:          
-                                    file.write(f"q1 : {q1_rad}  ,")
-                                    file.write(f"q2 : {q2_rad}  ,")
-                                    file.write(f"q3 : {q3_rad}  ,")
-                                    file.write(f"q4 : {q4_rad}  ,")
-                                    file.write(f"q5 : {q5_rad}  ,")
-                                    file.write(f"q6 : {q6_rad}  ,")
-                                    file.write(f"collision \n")
+                                    file.write(f"q1 : {q1_rad} , q2 : {q2_rad} , q3 : {q3_rad} , q4 : {q4_rad} , q5 : {q5_rad} , q6 : {q6_rad} , collision\n")
 
     end = time.time()
 
