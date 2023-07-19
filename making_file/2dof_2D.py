@@ -15,12 +15,12 @@ RED   = (255,   0,   0)
 
 # information of robot
 
-robot_link1 = 200
-robot_link2 = 200
+robot_link1 = 150
+robot_link2 = 100
 robot_thickness = 20
 
 # obstacle information(circle)((x,y), radius)
-obstacle = ((100, 200), 20)
+obstacle = ((-100, 100), 30)
 
 # calculate collision 
 def run():
