@@ -82,8 +82,8 @@ def run():
             file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
             
             with open(file_path, "a") as file:          
-                file.write(f"q1 : {q1_rad}  ")
-                file.write(f"q2 : {q2_rad}  ")
+                file.write(f"q1 : {q1_rad} , ")
+                file.write(f"q2 : {q2_rad} , ")
                 file.write(f"collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
 
     end = time.time()

@@ -79,11 +79,11 @@ def run():
 
             # save result to txt file continue
 
-            file_path = "/home/jeongil/collision/making_file/2dof_3D_result.txt"
+            file_path = "/home/jeongil/collision/making_file/2dof_2D-cspace_result.txt"
             
             with open(file_path, "a") as file:          
-                file.write(f"q1 : {q1_rad}  ")
-                file.write(f"q2 : {q2_rad}  ")
+                file.write(f"q1 : {q1_rad}  ,")
+                file.write(f"q2 : {q2_rad}  ,")
                 file.write(f"collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
 
     end = time.time()
@@ -92,9 +92,12 @@ def run():
     
     print(f"{end - start :.5f} sec")
 
-    file_path = "/home/jeongil/collision/making_file/2dof_3D_result.txt"
+    file_path = "/home/jeongil/collision/making_file/2dof_2D-cspace_result.txt"
     with open(file_path, "a") as file:
         file.write(f"\ncalculation time is : {end - start :.5f} sec")
+
+    
+
 
 
 def pairs(points):
