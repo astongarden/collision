@@ -51,7 +51,7 @@ def run():
             circle(obstacle)
 
 
-    # make graph
+            # # make graph to see robot arm and obstacle
 
             # fig, ax = plt.subplots()
 
@@ -70,15 +70,15 @@ def run():
             # plt.show()
 
 
-            # print result
+            # # print result
 
             # print('True' if (collide_1 or collide_2) else 'fail')
 
-            # save result to txt file
+            # save result to txt file continue
 
             file_path = "/home/jeongil/collision/making_file/result.txt"
             
-            with open(file_path, "a") as file:
+            with open(file_path, "a") as file:          
                 file.write(f"q1 : {q1_rad}  ")
                 file.write(f"q2 : {q2_rad}  ")
                 file.write(f"collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
