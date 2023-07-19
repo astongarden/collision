@@ -20,6 +20,10 @@ robot_link1 = 200
 robot_link2 = 200
 robot_thickness = 20
 
+# obstacle information(circle)((x,y), radius)
+obstacle = ((100, 150), 20)
+
+# calculate collision 
 def run():
     start = time.time()
 
@@ -43,9 +47,7 @@ def run():
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
                 )
             
-
-            # obstacle information(circle)((x,y), radius)
-            obstacle = ((200, 150), 20)
+            # collision check
 
             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
             polygon(link_1)
@@ -88,6 +90,7 @@ def run():
     with open(file_path, "a") as file:
         file.write(f"\ncalculation time is : {end - start :.5f} sec")
 
+# make a C_space graph
 def C_space():
     file_path = "/home/jeongil/collision/making_file/2dof_2D_graph_data.txt"
 
