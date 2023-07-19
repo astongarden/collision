@@ -19,8 +19,8 @@ robot_link2 = 200
 robot_thickness = 20
 
 def run():
-    for q1_rad in range(0, 10):
-        for q2_rad in range(0, 10):
+    for q1_rad in range(0, 360):
+        for q2_rad in range(0, 360):
             
             q1 = math.radians(q1_rad) 
             q2 = math.radians(q2_rad) 
