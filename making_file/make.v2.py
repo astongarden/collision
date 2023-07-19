@@ -53,26 +53,28 @@ def run():
 
     # make graph
 
-            fig, ax = plt.subplots()
+            # fig, ax = plt.subplots()
 
-            link1_patch = patches.Polygon(link_1, edgecolor='blue', facecolor='blue')
-            ax.add_patch(link1_patch)
+            # link1_patch = patches.Polygon(link_1, edgecolor='blue', facecolor='blue')
+            # ax.add_patch(link1_patch)
             
-            link2_patch = patches.Polygon(link_2, edgecolor='red', facecolor='red')
-            ax.add_patch(link2_patch)
+            # link2_patch = patches.Polygon(link_2, edgecolor='red', facecolor='red')
+            # ax.add_patch(link2_patch)
 
-            obstacle_patch = patches.Circle(obstacle[0], obstacle[1], edgecolor='black', facecolor='black')
-            ax.add_patch(obstacle_patch)
+            # obstacle_patch = patches.Circle(obstacle[0], obstacle[1], edgecolor='black', facecolor='black')
+            # ax.add_patch(obstacle_patch)
 
-            ax.set_xlim(-400, 400)
-            ax.set_ylim(-400, 400)
+            # ax.set_xlim(-400, 400)
+            # ax.set_ylim(-400, 400)
             
-    # plt.show()
+            # plt.show()
 
 
-    # print result
+            # print result
 
             # print('True' if (collide_1 or collide_2) else 'fail')
+
+            # save result to txt file
 
             file_path = "/home/jeongil/collision/making_file/result.txt"
             
@@ -80,8 +82,6 @@ def run():
                 file.write(f"q1 : {q1_rad}  ")
                 file.write(f"q2 : {q2_rad}  ")
                 file.write(f"collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
-
-
 
 
 
