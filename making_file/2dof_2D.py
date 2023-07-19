@@ -68,8 +68,7 @@ def run():
             # ax.set_ylim(-400, 400)
             # plt.show()
 
-
-            # save result to txt file continue
+            # save result in txt file and  recalculate
 
             file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
@@ -91,7 +90,7 @@ def run():
 
     file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
     with open(file_path, "a") as file:
-        file.write(f"\ncalculation time is : {end - start :.5f} sec")
+        file.write(f"\ncalculate time is : {end - start :.5f} sec")
 
 # make a C_space graph and save
 def C_space():
