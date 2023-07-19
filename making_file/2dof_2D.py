@@ -18,11 +18,13 @@ robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
 # obstacle : create a random circle
-obstacle = ((np.random.uniform(-100, 100), np.random.uniform(-100, 100)), np.random.uniform(10, 50))
+obstacle = ((np.random.randint(-100, 100), np.random.randint(-100, 100)), np.random.randint(10, 50))
 
 # calculate collision 
 def run():
     start = time.time()
+
+    # 기존 txt 파일 내용 삭제
 
     file_path = "/home/jeongil/collision/making_file/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
