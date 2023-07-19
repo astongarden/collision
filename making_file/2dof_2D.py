@@ -12,13 +12,11 @@ BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 
-# information of robot
+# information of test environment
 
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
-
-# obstacle information(circle)((x,y), radius)
 obstacle = ((-100, 100), 30)
 
 # calculate collision 

@@ -4,7 +4,6 @@ import time
 import numpy as np
 from matplotlib import pyplot as plt, patches
 
-
 # color
 
 BLACK = (  0,   0,   0)
@@ -13,8 +12,7 @@ BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 
-# information of robot
-
+# information of test environment
 l1 = 200
 l2 = 200
 l3 = 200
@@ -22,6 +20,8 @@ l4 = 200
 l5 = 200
 l6 = 200
 tk = 20
+obstacle = ((300, 600), 20)
+
 
 def run():
     start = time.time()
@@ -79,10 +79,6 @@ def run():
                                 (l1*math.cos(q1)+l2*math.cos(q2)+l3*math.cos(q3)+l4*math.cos(q4)+l5*math.cos(q5)+l6*math.cos(q6)+tk*math.sin(q6),l1*math.sin(q1)+l2*math.sin(q2)+l3*math.sin(q3)+l4*math.sin(q4)+l5*math.sin(q5)+l6*math.sin(q6)-tk*math.cos(q6))
                                 )             
 
-
-
-                            obstacle = ((300, 600), 20)
-
                             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
                             polygon(link_1)
                             circle(obstacle)
@@ -102,35 +98,9 @@ def run():
                             polygon(link_6)
                             circle(obstacle)
 
-                            # # make graph to see robot arm and obstacle
-
-                            # fig, ax = plt.subplots()
-
-                            # link1_patch = patches.Polygon(link_1, edgecolor='blue', facecolor='blue')
-                            # ax.add_patch(link1_patch)
-                            
-                            # link2_patch = patches.Polygon(link_2, edgecolor='red', facecolor='red')
-                            # ax.add_patch(link2_patch)
-
-                            # obstacle_patch = patches.Circle(obstacle[0], obstacle[1], edgecolor='black', facecolor='black')
-                            # ax.add_patch(obstacle_patch)
-
-                            # ax.set_xlim(-400, 400)
-                            # ax.set_ylim(-400, 400)
-                            
-                            # plt.show()
-
-
-                            # # print result
-
-                            # print('True' if (collide_1 or collide_2 or collide_3 or collide_4 or collide_5 or collide_6) else 'fail')
-
-                            # save result to txt file continue
-
                             file_path = "/home/jeongil/collision/making_file/6dof_2D_result.txt"
                             
                             if (collide_1 or collide_2 or collide_3 or collide_4 or collide_5 or collide_6):
-
                                 with open(file_path, "a") as file:          
                                     file.write(f"q1 : {q1_rad} , q2 : {q2_rad} , q3 : {q3_rad} , q4 : {q4_rad} , q5 : {q5_rad} , q6 : {q6_rad} , collision\n")
 
@@ -139,14 +109,9 @@ def run():
     #check time and print, save in txt file
     
     print(f"{end - start :.5f} sec")
-
     file_path = "/home/jeongil/collision/making_file/6dof_2D_result.txt"
     with open(file_path, "a") as file:
         file.write(f"\ncalculation time is : {end - start :.5f} sec")
-
-    
-
-
 
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):
@@ -168,7 +133,6 @@ def line(start, end, color=BLACK, camera=(0, 0)):
 
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
-
 
 
 # run code 
