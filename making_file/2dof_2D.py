@@ -3,6 +3,7 @@ import gjk
 import math
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
+import time
 
 # color
 
@@ -19,6 +20,8 @@ robot_link2 = 200
 robot_thickness = 20
 
 def run():
+    start = time.time()
+
     for q1_rad in range(0, 360):
         for q2_rad in range(0, 360):
             
@@ -76,13 +79,20 @@ def run():
 
             # save result to txt file continue
 
-            file_path = "/home/jeongil/collision/making_file/result.txt"
+            file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
             
             with open(file_path, "a") as file:          
                 file.write(f"q1 : {q1_rad}  ")
                 file.write(f"q2 : {q2_rad}  ")
                 file.write(f"collision resutl : {'True' if (collide_1 or collide_2) else 'fail'}\n")
 
+    end = time.time()
+
+    print(f"{end - start :.5f} sec")
+
+    file_path = "/home/jeongil/collision/making_file/2dof_2D_result.txt"
+    with open(file_path, "a") as file:
+        file.write(f"\ncalculation time is : {end - start :.5f} sec")
 
 
 def pairs(points):
