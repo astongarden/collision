@@ -26,12 +26,12 @@ obstacle = ((300, 600), 20)
 def run():
     start = time.time()
 
-    for q1_rad in range(0, 360, 20):
-        for q2_rad in range(0, 360, 20):
-            for q3_rad in range(0, 360, 20):
-                for q4_rad in range(0, 360, 20):
-                    for q5_rad in range(0, 360, 20):     
-                        for q6_rad in range(0, 360, 20):
+    for q1_rad in range(0, 360, 30):
+        for q2_rad in range(0, 360, 30):
+            for q3_rad in range(0, 360, 30):
+                for q4_rad in range(0, 360, 30):
+                    for q5_rad in range(0, 360, 30):     
+                        for q6_rad in range(0, 360, 30):
 
             
                             q1 = math.radians(q1_rad) 
@@ -139,4 +139,3 @@ def add(p1, p2):
 
 if __name__ == '__main__':
     run()
-    
