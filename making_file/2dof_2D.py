@@ -4,7 +4,6 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle
-from numba import jit
 
 # color
 
@@ -19,7 +18,6 @@ RED   = (255,   0,   0)
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
-
 obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
 # calculate collision with circle obstacle
@@ -217,9 +215,6 @@ def line(start, end, color=BLACK, camera=(0, 0)):
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
-
-
-
 # run code 
 if __name__ == '__main__':
     if obstacle == 1:
@@ -254,4 +249,3 @@ if __name__ == '__main__':
         # plt.show()
         
     C_space()
-
