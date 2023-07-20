@@ -222,8 +222,8 @@ def add(p1, p2):
 # run code 
 if __name__ == '__main__':
     if obstacle == 1:
-        x = np.random.randint(-100, 100)
-        y = np.random.randint(-100, 100)
+        x = np.random.randint(10, 200)
+        y = np.random.randint(10, 200)
         radius = np.random.randint(10, 50)
         obstacle = ((x, y), radius)
         run_circle()
@@ -237,8 +237,8 @@ if __name__ == '__main__':
         # plt.show()
 
     else:
-        x = np.random.randint(-100, 100)
-        y = np.random.randint(-100, 100)
+        x = np.random.randint(10, 200)
+        y = np.random.randint(10, 200)
         h = np.random.randint(10, 80)
         w = np.random.randint(10, 80)
         obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w), (x, y))
