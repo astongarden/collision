@@ -1,14 +1,14 @@
 import numpy as np
 
-data = '/home/jeongil/collision/making_file//2dof_2D_collision_data.txt/'
+data = '/home/jeongil/collision/making_file/2dof_2D_collision_10.txt/'
 
 def load_data(file_path):
     with open(file_path, 'r')as file:
         data = file.readlines()
     return data
 
-X_train = data[:, :2]  # 입력 데이터 (joint1_angle, joint2_angle)
-y_train = data[:, 2]   # 레이블 (충돌 여부)
+X_train = data[:, :2]
+y_train = data[:, 2]
 
 
 class Perceptron:
