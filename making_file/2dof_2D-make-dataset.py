@@ -217,35 +217,42 @@ def add(p1, p2):
 
 # run code 
 if __name__ == '__main__':
-    if obstacle == 1:
-        x = np.random.randint(10, 200)
-        y = np.random.randint(10, 200)
-        radius = np.random.randint(10, 50)
-        obstacle = ((x, y), radius)
-        run_circle()
+    while True:
+        if obstacle == 1:
+            x = np.random.randint(10, 200)
+            y = np.random.randint(10, 200)
+            radius = np.random.randint(10, 50)
+            obstacle = ((x, y), radius)
+            run_circle()
 
-        # circle show
-        # fig, ax = plt.subplots()
-        # obstacle = Circle((x, y),radius, facecolor='red', alpha=0.5)
-        # ax.add_patch(obstacle)
-        # ax.set_xlim(-300, 300)
-        # ax.set_ylim(-300, 300)
-        # plt.show()
+            # circle show
+            # fig, ax = plt.subplots()
+            # obstacle = Circle((x, y),radius, facecolor='red', alpha=0.5)
+            # ax.add_patch(obstacle)
+            # ax.set_xlim(-300, 300)
+            # ax.set_ylim(-300, 300)
+            # plt.show()
+            break
 
-    else:
-        x = np.random.randint(10, 200)
-        y = np.random.randint(10, 200)
-        h = np.random.randint(10, 80)
-        w = np.random.randint(10, 80)
-        obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w), (x, y))
-        run_rectangle()
+        elif obstacle == 2:
+            x = np.random.randint(10, 200)
+            y = np.random.randint(10, 200)
+            h = np.random.randint(10, 80)
+            w = np.random.randint(10, 80)
+            obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w), (x, y))
+            run_rectangle()
 
-        # # Rectangle show
-        # fig, ax = plt.subplots()
-        # obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
-        # ax.add_patch(obstacle)
-        # ax.set_xlim(-300, 300)
-        # ax.set_ylim(-300, 300)
-        # plt.show()
-        
+            # # Rectangle show
+            # fig, ax = plt.subplots()
+            # obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
+            # ax.add_patch(obstacle)
+            # ax.set_xlim(-300, 300)
+            # ax.set_ylim(-300, 300)
+            # plt.show()
+            break
+
+        else:
+            print("choise 1 or 2")
+            obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
+
     C_space()
