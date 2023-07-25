@@ -1,4 +1,4 @@
 robot_link1 : 150
 robot_link2 : 100
 robot_thickness : 20
-obstacle : ((55, 169), 33)
+obstacle : ((136, 59), 30)
