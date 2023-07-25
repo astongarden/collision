@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle
 
 # color
+
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 BLUE  = (  0,   0, 255)
@@ -13,15 +14,16 @@ GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 
 # information of test environment
+
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
 obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
-# calculate collision with circle obstacle
-def run_circle():
-    start = time.time()
 
+def file_clear():
+
+    # File clear
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
@@ -32,6 +34,12 @@ def run_circle():
     with open(file_path, "w") as file:          
         file.write(f"")
 
+
+
+# calculate collision with circle obstacle
+def run_circle():
+
+    start = time.time()
 
     for q1_rad in range(0, 360):
         for q2_rad in range(0, 360):
@@ -59,7 +67,8 @@ def run_circle():
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
             circle(obstacle)           
 
-            # save result
+            # save result in txt file and  recalculate
+
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
@@ -69,14 +78,9 @@ def run_circle():
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
-    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
-    with open(file_path, "a") as file:          
-        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
-
     end = time.time()
 
-    #check time
-
+    #check time and print, save in txt file
     print(f"{end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
@@ -86,16 +90,6 @@ def run_circle():
 # calculate collision with rectangle obstacle
 def run_rectangle():
     start = time.time()
-
-    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
-    with open(file_path, "w") as file:          
-        file.write(f"")
-    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
-    with open(file_path, "w") as file:          
-        file.write(f"")
-    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
-    with open(file_path, "w") as file:          
-        file.write(f"")
 
     for q1_rad in range(0, 360):
         for q2_rad in range(0, 360):
@@ -123,7 +117,8 @@ def run_rectangle():
             collide_2 = gjk.collidePolyPoly(link_2, obstacle)
             polygon(obstacle)
 
-            # save result
+            # save result in txt file and  recalculate
+
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
@@ -133,13 +128,9 @@ def run_rectangle():
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
-    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
-    with open(file_path, "a") as file:          
-        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
-
     end = time.time()
 
-    #check time
+    #check time and print, save in txt file
     print(f"{end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
@@ -179,7 +170,6 @@ def C_space():
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
     plt.title("C-space")
-
     plt.savefig('/home/jeongil/collision/making_file/result/2dof_2D_C-space.png')
     plt.show()
 
@@ -187,26 +177,24 @@ def C_space():
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):
         yield (points[i], points[j])
-
 def circles(cs, color=BLACK, camera=(0, 0)):
     for c in cs:
         circle(c, color, camera)
-
 def circle(c, color=BLACK, camera=(0, 0)):
     ()
-
 def polygon(points, color=BLACK, camera=(0, 0)):
     for a, b in pairs(points):
         line(a, b, color, camera)
-
 def line(start, end, color=BLACK, camera=(0, 0)):
     ()
-
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
 # run code 
 if __name__ == '__main__':
+
+    file_clear()
+    
     while True:
         if obstacle == 1:
             x = np.random.randint(10, 200)
@@ -215,13 +203,9 @@ if __name__ == '__main__':
             obstacle = ((x, y), radius)
             run_circle()
 
-            # circle show
-            # fig, ax = plt.subplots()
-            # obstacle = Circle((x, y),radius, facecolor='red', alpha=0.5)
-            # ax.add_patch(obstacle)
-            # ax.set_xlim(-300, 300)
-            # ax.set_ylim(-300, 300)
-            # plt.show()
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
+            with open(file_path, "a") as file:          
+                file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
             break
 
         elif obstacle == 2:
@@ -232,13 +216,9 @@ if __name__ == '__main__':
             obstacle = ((x,y), (x+h, y), (x+h, y+w), (x, y+w), (x, y))
             run_rectangle()
 
-            # # Rectangle show
-            # fig, ax = plt.subplots()
-            # obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
-            # ax.add_patch(obstacle)
-            # ax.set_xlim(-300, 300)
-            # ax.set_ylim(-300, 300)
-            # plt.show()
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
+            with open(file_path, "a") as file:          
+                file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
             break
 
         else:
