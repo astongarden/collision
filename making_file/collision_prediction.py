@@ -1,15 +1,14 @@
 import numpy as np
 
-data = '/home/jeongil/collision/making_file/2dof_2D_collision_10.txt/'
+dataset = "/home/jeongil/collision/making_file/dataset.txt"
 
 def load_data(file_path):
     with open(file_path, 'r')as file:
-        data = file.readlines()
-    return data
+        dataset = file.readlines()
+    return dataset
 
-X_train = data[:, :2]
-y_train = data[:, 2]
-
+X_train = dataset[:, 2]
+y_train = dataset[:, 1]
 
 class Perceptron:
     def __init__(self, input_size, learning_rate=0.01, epochs=100):
