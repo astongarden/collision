@@ -23,8 +23,7 @@ obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
 def file_clear():
 
-    # File initialization
-
+    # File clear
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
@@ -54,7 +53,6 @@ def run_circle():
                 (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
                 (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
                 )
-
             link_2 = (
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
                 (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
@@ -85,9 +83,9 @@ def run_circle():
     #check time and print, save in txt file
     print(f"{end - start :.5f} sec")
 
-    # file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
-    # with open(file_path, "a") as file:
-    #     file.write(f"\ncalculate time is : {end - start :.5f} sec")
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+    with open(file_path, "a") as file:
+        file.write(f"\ncalculate time is : {end - start :.5f} sec")
 
 # calculate collision with rectangle obstacle
 def run_rectangle():
@@ -105,7 +103,6 @@ def run_rectangle():
                 (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
                 (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
                 )
-
             link_2 = (
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
                 (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
@@ -173,7 +170,6 @@ def C_space():
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
     plt.title("C-space")
-
     plt.savefig('/home/jeongil/collision/making_file/result/2dof_2D_C-space.png')
     plt.show()
 
@@ -181,21 +177,16 @@ def C_space():
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):
         yield (points[i], points[j])
-
 def circles(cs, color=BLACK, camera=(0, 0)):
     for c in cs:
         circle(c, color, camera)
-
 def circle(c, color=BLACK, camera=(0, 0)):
     ()
-
 def polygon(points, color=BLACK, camera=(0, 0)):
     for a, b in pairs(points):
         line(a, b, color, camera)
-
 def line(start, end, color=BLACK, camera=(0, 0)):
     ()
-
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
@@ -215,14 +206,6 @@ if __name__ == '__main__':
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
             with open(file_path, "a") as file:          
                 file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
-
-            # circle show
-            # fig, ax = plt.subplots()
-            # obstacle = Circle((x, y),radius, facecolor='red', alpha=0.5)
-            # ax.add_patch(obstacle)
-            # ax.set_xlim(-300, 300)
-            # ax.set_ylim(-300, 300)
-            # plt.show()
             break
 
         elif obstacle == 2:
@@ -236,14 +219,6 @@ if __name__ == '__main__':
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
             with open(file_path, "a") as file:          
                 file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
-
-            # # Rectangle show
-            # fig, ax = plt.subplots()
-            # obstacle = Rectangle((x, y), h, w, facecolor='red', alpha=0.5)
-            # ax.add_patch(obstacle)
-            # ax.set_xlim(-300, 300)
-            # ax.set_ylim(-300, 300)
-            # plt.show()
             break
 
         else:

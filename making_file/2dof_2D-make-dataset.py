@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle
 
 # color
-
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
 BLUE  = (  0,   0, 255)
@@ -14,7 +13,6 @@ GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 
 # information of test environment
-
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 20
@@ -23,8 +21,6 @@ obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 # calculate collision with circle obstacle
 def run_circle():
     start = time.time()
-
-    # 기존 txt 파일 내용 삭제
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
@@ -49,7 +45,6 @@ def run_circle():
                 (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
                 (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
                 )
-
             link_2 = (
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
                 (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
@@ -64,8 +59,7 @@ def run_circle():
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
             circle(obstacle)           
 
-            # save result in txt file and  recalculate
-
+            # save result
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
@@ -81,7 +75,8 @@ def run_circle():
 
     end = time.time()
 
-    #check time and print, save in txt file
+    #check time
+
     print(f"{end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
@@ -92,8 +87,6 @@ def run_circle():
 def run_rectangle():
     start = time.time()
 
-    # 기존 txt 파일 내용 삭제
-
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
@@ -103,7 +96,6 @@ def run_rectangle():
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
-
 
     for q1_rad in range(0, 360):
         for q2_rad in range(0, 360):
@@ -117,7 +109,6 @@ def run_rectangle():
                 (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
                 (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
                 )
-
             link_2 = (
                 (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
                 (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
@@ -132,8 +123,7 @@ def run_rectangle():
             collide_2 = gjk.collidePolyPoly(link_2, obstacle)
             polygon(obstacle)
 
-            # save result in txt file and  recalculate
-
+            # save result
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
             if (collide_1 or collide_2):
                 with open(file_path, "a") as file:
@@ -149,7 +139,7 @@ def run_rectangle():
 
     end = time.time()
 
-    #check time and print, save in txt file
+    #check time
     print(f"{end - start :.5f} sec")
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
