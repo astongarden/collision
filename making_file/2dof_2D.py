@@ -15,7 +15,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 10
+robot_thickness = 20
 obstacle = ((50, 100), 30)
 # obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
@@ -40,16 +40,16 @@ def run_circle():
             q2 = math.radians(q1_rad+q2_rad) 
 
             link_1 = (
-                (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
-                (-robot_thickness*math.sin(q1),robot_thickness*math.cos(q1)),
-                (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
-                (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
+                ((robot_thickness/2)*math.sin(q1),-(robot_thickness/2)*math.cos(q1)),
+                (-(robot_thickness/2)*math.sin(q1),(robot_thickness/2)*math.cos(q1)),
+                (-(robot_thickness/2)*math.sin(q1)+robot_link1*math.cos(q1),(robot_thickness/2)*math.cos(q1)+robot_link1*math.sin(q1)),
+                ((robot_thickness/2)*math.sin(q1)+robot_link1*math.cos(q1),-(robot_thickness/2)*math.cos(q1)+robot_link1*math.sin(q1))
                 )
             link_2 = (
-                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
-                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
-                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)+robot_link2*math.sin(q2)),
-                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
+                (robot_link1*math.cos(q1)+(robot_thickness/2)*math.sin(q2),robot_link1*math.sin(q1)-(robot_thickness/2)*math.cos(q2)),
+                (robot_link1*math.cos(q1)-(robot_thickness/2)*math.sin(q2),robot_link1*math.sin(q1)+(robot_thickness/2)*math.cos(q2)),
+                (robot_link1*math.cos(q1)-(robot_thickness/2)*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+(robot_thickness/2)*math.cos(q2)+robot_link2*math.sin(q2)),
+                (robot_link1*math.cos(q1)+(robot_thickness/2)*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-(robot_thickness/2)*math.cos(q2)+robot_link2*math.sin(q2))
                 )
             
             # collision check with circle obstacle
@@ -81,7 +81,7 @@ def run_circle():
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "a") as file:          
-        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
+        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\n(robot_thickness/2) : {(robot_thickness/2)}\nobstacle : {obstacle}")
 
     end = time.time()
 
@@ -114,16 +114,16 @@ def run_rectangle():
             q2 = math.radians(q2_rad) 
 
             link_1 = (
-                (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
-                (-robot_thickness*math.sin(q1),robot_thickness*math.cos(q1)),
-                (-robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),robot_thickness*math.cos(q1)+robot_link1*math.sin(q1)),
-                (robot_thickness*math.sin(q1)+robot_link1*math.cos(q1),-robot_thickness*math.cos(q1)+robot_link1*math.sin(q1))
+                ((robot_thickness/2)*math.sin(q1),-(robot_thickness/2)*math.cos(q1)),
+                (-(robot_thickness/2)*math.sin(q1),(robot_thickness/2)*math.cos(q1)),
+                (-(robot_thickness/2)*math.sin(q1)+robot_link1*math.cos(q1),(robot_thickness/2)*math.cos(q1)+robot_link1*math.sin(q1)),
+                ((robot_thickness/2)*math.sin(q1)+robot_link1*math.cos(q1),-(robot_thickness/2)*math.cos(q1)+robot_link1*math.sin(q1))
                 )
             link_2 = (
-                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)),
-                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)),
-                (robot_link1*math.cos(q1)-robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+robot_thickness*math.cos(q2)+robot_link2*math.sin(q2)),
-                (robot_link1*math.cos(q1)+robot_thickness*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-robot_thickness*math.cos(q2)+robot_link2*math.sin(q2))
+                (robot_link1*math.cos(q1)+(robot_thickness/2)*math.sin(q2),robot_link1*math.sin(q1)-(robot_thickness/2)*math.cos(q2)),
+                (robot_link1*math.cos(q1)-(robot_thickness/2)*math.sin(q2),robot_link1*math.sin(q1)+(robot_thickness/2)*math.cos(q2)),
+                (robot_link1*math.cos(q1)-(robot_thickness/2)*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)+(robot_thickness/2)*math.cos(q2)+robot_link2*math.sin(q2)),
+                (robot_link1*math.cos(q1)+(robot_thickness/2)*math.sin(q2)+robot_link2*math.cos(q2),robot_link1*math.sin(q1)-(robot_thickness/2)*math.cos(q2)+robot_link2*math.sin(q2))
                 )
             
             # collision check with poly obstacle
@@ -145,7 +145,7 @@ def run_rectangle():
 
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "a") as file:          
-        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\nrobot_thickness : {robot_thickness}\nobstacle : {obstacle}")
+        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\n(robot_thickness/2) : {(robot_thickness/2)}\nobstacle : {obstacle}")
 
     end = time.time()
 
