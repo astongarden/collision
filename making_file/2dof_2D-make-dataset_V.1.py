@@ -27,12 +27,12 @@ def file_clear():
         file.write(f"")
 
 # calculate collision with circle obstacle
-def run_circle():
+def run_all_angle():
 
     start = time.time()
 
-    for q1_rad in range(0, 360, 30):
-        for q2_rad in range(0, 360, 30):
+    for q1_rad in range(0, 360):
+        for q2_rad in range(0, 360):
             
             q1 = math.radians(q1_rad)
             q2 = math.radians(q2_rad)
@@ -54,22 +54,27 @@ def run_circle():
             circle(obstacle)
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
             circle(obstacle)
- 
-            # show robot link
-            fig, ax = plt.subplots()
-            body = Polygon(link_1)
-            ax.add_patch(body)
-            body = Polygon(link_2)
-            ax.add_patch(body)
-            ax.set_xlim(-300, 300)
-            ax.set_ylim(-300, 300)
-            plt.show()
+
+            # collision true = 0
+            if collide_1 or collide_2:
+                collision = 0
+            else:
+                collision = 1
+                 
+            # # show robot link
+            # fig, ax = plt.subplots()
+            # body = Polygon(link_1)
+            # ax.add_patch(body)
+            # body = Polygon(link_2)
+            # ax.add_patch(body)
+            # ax.set_xlim(-300, 300)
+            # ax.set_ylim(-300, 300)
+            # plt.show()
 
             # save result in txt file and  recalculate
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
             with open(file_path, "a") as file:          
-                file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
-
+                file.write(f"{q1_rad}, {q2_rad}, {collision}\n")
     end = time.time()
 
     print(f"{end - start :.5f} sec")
@@ -135,5 +140,5 @@ def add(p1, p2):
 if __name__ == '__main__':
 
     file_clear()
-    run_circle()
+    run_all_angle()
     C_space()
