@@ -15,10 +15,9 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 20
+robot_thickness = 40
 obstacle = ((50, 100), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
-
 
 def file_clear():
 
@@ -32,8 +31,8 @@ def run_circle():
 
     start = time.time()
 
-    for q1_rad in range(0, 360):
-        for q2_rad in range(0, 360):
+    for q1_rad in range(0, 360, 30):
+        for q2_rad in range(0, 360, 30):
             
             q1 = math.radians(q1_rad)
             q2 = math.radians(q2_rad)
@@ -43,32 +42,30 @@ def run_circle():
             link1_ro = np.matmul(r1, link1_1.T)
             link_1 = (link1_ro.T)
 
-            link2_1 = np.array(([0, robot_thickness/2], [0, -robot_thickness/2], [robot_link2, robot_thickness/2], [robot_link2, robot_thickness/2]))
+            link2_1 = np.array(([0, robot_thickness/2], [0, -robot_thickness/2], [robot_link2, -robot_thickness/2], [robot_link2, robot_thickness/2]))
             r2 = np.array(([math.cos(q2), -math.sin(q2)], [math.sin(q2), math.cos(q2)]))
             link2_ro = np.matmul(r2, link2_1.T)
             link2_ro += np.array(([robot_link1], [0]))
-            link2_ro = np.matmul(r1, link2_ro)
-            link_2 = (link2_ro.T)
+            link2_ro2 = np.matmul(r1, link2_ro)
+            link_2 = (link2_ro2.T)
 
             # collision check with circle obstacle
-
             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
             circle(obstacle)
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
             circle(obstacle)
  
-            # # show robot link
-            # fig, ax = plt.subplots()
-            # body = Polygon(link_1)
-            # ax.add_patch(body)
-            # body = Polygon(link_2)
-            # ax.add_patch(body)
-            # ax.set_xlim(-300, 300)
-            # ax.set_ylim(-300, 300)
-            # plt.show()
+            # show robot link
+            fig, ax = plt.subplots()
+            body = Polygon(link_1)
+            ax.add_patch(body)
+            body = Polygon(link_2)
+            ax.add_patch(body)
+            ax.set_xlim(-300, 300)
+            ax.set_ylim(-300, 300)
+            plt.show()
 
             # save result in txt file and  recalculate
-
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
@@ -81,8 +78,6 @@ def run_circle():
     # plt.ylabel("joint 2 angle(q2, degrees)")
     # plt.title("C-space")
     # plt.show()
-
-
 
 # make a C_space graph and save
 def C_space():
@@ -119,7 +114,6 @@ def C_space():
     plt.title("C-space")
     plt.savefig('/home/jeongil/collision/making_file/result/2dof_2D_C-space.png')
     plt.show()
-
 
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):

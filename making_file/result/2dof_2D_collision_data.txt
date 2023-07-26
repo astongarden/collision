@@ -18847,4 +18847,4 @@ collision  q1 : 121   q2 : 231
 collision  q1 : 121   q2 : 232
 collision  q1 : 121   q2 : 233
 
-calculate time is : 1.79687 sec
+calculate time is : 1.86003 sec
