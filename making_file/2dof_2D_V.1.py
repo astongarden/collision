@@ -22,7 +22,13 @@ obstacle = ((50, 100), 30)
 def file_clear():
 
     # File clear
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+    with open(file_path, "w") as file:          
+        file.write(f"")
     file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
+    with open(file_path, "w") as file: 
+        file.write(f"")
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
     with open(file_path, "w") as file:          
         file.write(f"")
 
@@ -72,11 +78,21 @@ def run_all_angle():
             # plt.show()
 
             # save result in txt file and  recalculate
+            file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
+            if (collide_1 or collide_2):
+                with open(file_path, "a") as file:
+                    file.write(f"collision  q1 : {q1_rad}   q2 : {q2_rad}\n")
+                
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
             with open(file_path, "a") as file:          
-                file.write(f"{q1_rad}, {q2_rad}, {collision}\n")
-    end = time.time()
+                file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
 
+    file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
+    with open(file_path, "a") as file:          
+        file.write(f"robot_link1 : {robot_link1}\nrobot_link2 : {robot_link2}\n(robot_thickness/2) : {(robot_thickness/2)}\nobstacle : {obstacle}")
+
+    end = time.time()
+    
     print(f"{end - start :.5f} sec")
 
     # plt.xlabel("joint 1 angle(q1, degrees)")
