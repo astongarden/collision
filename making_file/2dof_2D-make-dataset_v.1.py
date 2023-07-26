@@ -27,10 +27,6 @@ def file_clear():
     with open(file_path, "w") as file:          
         file.write(f"")
 
-    # file_path = "/home/jeongil/collision/making_file/result/2dof_2D_input.txt"
-    # with open(file_path, "w") as file:          
-    #     file.write(f"")
-
 # calculate collision with circle obstacle
 def run_circle():
 
@@ -51,8 +47,8 @@ def run_circle():
             r2 = np.array(([math.cos(q2), -math.sin(q2)], [math.sin(q2), math.cos(q2)]))
             link2_ro = np.matmul(r2, link2_1.T)
             link2_ro += np.array(([robot_link1], [0]))
-            link2_ro2 = np.matmul(r1, link2_ro)
-            link_2 = (link2_ro2.T)
+            link2_ro = np.matmul(r1, link2_ro)
+            link_2 = (link2_ro.T)
 
             # collision check with circle obstacle
 
@@ -73,11 +69,6 @@ def run_circle():
 
             # save result in txt file and  recalculate
 
-            # file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
-            # if (collide_1 or collide_2):
-            #     with open(file_path, "a") as file:
-            #         file.write(f"collision  q1 : {q1_rad}   q2 : {q2_rad}\n")
-
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_graph_data.txt"
             with open(file_path, "a") as file:          
                 file.write(f"{q1_rad}, {q2_rad}, {'0' if (collide_1 or collide_2) else '1'}\n")
@@ -86,10 +77,10 @@ def run_circle():
 
     print(f"{end - start :.5f} sec")
 
-    plt.xlabel("joint 1 angle(q1, degrees)")
-    plt.ylabel("joint 2 angle(q2, degrees)")
-    plt.title("C-space")
-    plt.show()
+    # plt.xlabel("joint 1 angle(q1, degrees)")
+    # plt.ylabel("joint 2 angle(q2, degrees)")
+    # plt.title("C-space")
+    # plt.show()
 
 
 

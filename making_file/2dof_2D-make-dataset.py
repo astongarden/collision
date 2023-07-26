@@ -3,7 +3,7 @@ import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Circle
+from matplotlib.patches import Rectangle, Circle, Polygon
 
 # color
 BLACK = (  0,   0,   0)
@@ -16,7 +16,8 @@ RED   = (255,   0,   0)
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 10
-obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
+obstacle = ((50, 100), 30)
+# obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
 # calculate collision with circle obstacle
 def run_circle():
@@ -36,7 +37,7 @@ def run_circle():
         for q2_rad in range(0, 360):
             
             q1 = math.radians(q1_rad) 
-            q2 = math.radians(q2_rad) 
+            q2 = math.radians(q1_rad+q2_rad) 
 
             link_1 = (
                 (robot_thickness*math.sin(q1),-robot_thickness*math.cos(q1)),
@@ -56,7 +57,17 @@ def run_circle():
             collide_1 = gjk.collidePolyCircle(link_1, obstacle)
             circle(obstacle)
             collide_2 = gjk.collidePolyCircle(link_2, obstacle)
-            circle(obstacle)           
+            circle(obstacle)     
+             
+            # # show robot link
+            # fig, ax = plt.subplots()
+            # body = Polygon(link_1)
+            # ax.add_patch(body)
+            # body = Polygon(link_2)
+            # ax.add_patch(body)
+            # ax.set_xlim(-300, 300)
+            # ax.set_ylim(-300, 300)
+            # plt.show()      
 
             # save result
             file_path = "/home/jeongil/collision/making_file/result/2dof_2D_collision_data.txt"
