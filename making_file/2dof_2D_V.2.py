@@ -5,6 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle, Polygon
 import ast
+from sklearn import svm
+
 
 # color
 BLACK = (  0,   0,   0)
@@ -74,20 +76,24 @@ def run_random_angle():
 def make_C_space():
     start = time.time()
     # make a C-space graph
+    plt.scatter([], [], color='RED', s=10, alpha=0.5, marker='o', label='collision_true')
+    plt.scatter([], [], color='BLUE', s=10, alpha=0.5, marker='o', label='collision_false')
+
     for coordinates in collision_true:
         x, y = coordinates
-        plt.scatter(x, y, color='RED', s=10, alpha=0.5, label='collision_true', marker='o')
+        plt.scatter(x, y, color='RED', s=10, alpha=0.5, marker='o')
     for coordinates in collision_false:
         x, y = coordinates
-        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, label='collision_false', marker='o')
+        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='o')
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
     plt.title("C-space")
-    plt.legend(loc='best')
+    plt.legend()
     end = time.time()
     print(f"{end - start :.5f} sec")
     plt.show()
  
+
 
 
 
