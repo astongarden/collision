@@ -1,5 +1,4 @@
 import gjk
-import svm_ex
 import math
 import time
 import numpy as np
