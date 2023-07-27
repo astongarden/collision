@@ -29,7 +29,7 @@ result = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(3):
+    for i in range(10):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         q = [q1_rad] + [q2_rad]
@@ -56,13 +56,15 @@ def run_random_angle():
         circle(obstacle)
 
         if collide_1 or collide_2:
-            collision = 1
+            collision = [1]
             collision_true.append(q)
             result.append(collision)
         else:
-            collision = 0
+            collision = [0]
             collision_false.append(q)
             result.append(collision)
+        
+        
 
         # # show robot link
         # fig, ax = plt.subplots()
@@ -88,21 +90,24 @@ def make_C_space():
         x, y = coordinates
         plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='o')
 
-    # plt.xlabel("joint 1 angle(q1, degrees)")
-    # plt.ylabel("joint 2 angle(q2, degrees)")
-    # plt.title("C-space")
-    # plt.legend()
-    # end = time.time()
-    # print(f"{end - start :.5f} sec")
-    # plt.show()
+    plt.xlabel("joint 1 angle(q1, degrees)")
+    plt.ylabel("joint 2 angle(q2, degrees)")
+    plt.title("C-space")
+    plt.legend()
+    end = time.time()
+    print(f"{end - start :.5f} sec")
+    plt.show()
+    
 
-    # svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
-    # collision_result = collision_true + collision_false
-    # svm.fit(collision_result, result)
-    # plot_decision_regions(collision_result, result, classifier=svm)
-    # plt.legend(loc='upper left')
-    # plt.tight_layout()
-    # plt.show()
+    collision_result = np.reshape((collision_true + collision_false), (-1, 2))
+
+    svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
+    collision_result = collision_true + collision_false
+    svm.fit(collision_result, result)
+    plot_decision_regions(collision_result, result, classifier=svm)
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
 
 
 def pairs(points):
@@ -121,32 +126,34 @@ def line(start, end, color=BLACK, camera=(0, 0)):
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
-def plot_decision_regions(x, y, classifier, test_idx=None, resolution=0.02):
+def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
-    # 마커와 컬러맵을 설정합니다.
-    markers = ('o', 's', 'x', '^', 'v')
+    # setup marker generator and color map
+    markers = ('o', 's', '^', 'v', '<')
     colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
     cmap = ListedColormap(colors[:len(np.unique(y))])
 
-    # 결정 경계를 그립니다.
-    x1_min, x1_max = x[:][0].min() - 1, x[:][0].max() + 1
-    x2_min, x2_max = x[:][1].min() - 1, x[:][1].max() + 1
+    # plot the decision surface
+    x1_min, x1_max = X[:][0].min() - 1, X[:][0].max() + 1
+    x2_min, x2_max = X[:][1].min() - 1, X[:][1].max() + 1
     xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
                            np.arange(x2_min, x2_max, resolution))
-    Z = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
-    Z = Z.reshape(xx1.shape)
-    plt.contourf(xx1, xx2, Z, alpha=0.3, cmap=cmap)
+    lab = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
+    lab = lab.reshape(xx1.shape)
+    plt.contourf(xx1, xx2, lab, alpha=0.3, cmap=cmap)
     plt.xlim(xx1.min(), xx1.max())
     plt.ylim(xx2.min(), xx2.max())
 
+    # plot class examples
     for idx, cl in enumerate(np.unique(y)):
-        plt.scatter(X=x[y == cl, 0],
-                    y=x[y == cl, 1],
-                    alpha=0.8,
+        plt.scatter(x=X[y == cl, 0], 
+                    y=X[y == cl, 1],
+                    alpha=0.8, 
                     c=colors[idx],
-                    marker=markers[idx],
-                    label=cl,
+                    marker=markers[idx], 
+                    label=f'Class {cl}', 
                     edgecolor='black')
+
 
 # run code 
 if __name__ == '__main__':
@@ -157,8 +164,8 @@ if __name__ == '__main__':
     run_random_angle()
 
     end = time.time()
-    # check time
-    print(f"{end - start :.5f} sec")
+    # # check time
+    # print(f"{end - start :.5f} sec")
 
     # make C-space graph
     make_C_space()
