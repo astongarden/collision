@@ -1,12 +1,11 @@
 import gjk
+import svm_ex
 import math
 import time
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle, Polygon
 import ast
-from sklearn import svm
-
 
 # color
 BLACK = (  0,   0,   0)
@@ -25,6 +24,7 @@ obstacle = ((50, 100), 30)
 collision_true = []
 collision_false = []
 result = []
+
 
 # calculate collision with circle obstacle
 def run_random_angle():
@@ -54,7 +54,6 @@ def run_random_angle():
     collide_2 = gjk.collidePolyCircle(link_2, obstacle)
     circle(obstacle)
 
-    # collision true = 0
     if collide_1 or collide_2:
         collision = 0
         collision_true.append(q)
@@ -75,7 +74,7 @@ def run_random_angle():
 
 def make_C_space():
     start = time.time()
-    # make a C-space graph
+
     plt.scatter([], [], color='RED', s=10, alpha=0.5, marker='o', label='collision_true')
     plt.scatter([], [], color='BLUE', s=10, alpha=0.5, marker='o', label='collision_false')
 
@@ -85,6 +84,7 @@ def make_C_space():
     for coordinates in collision_false:
         x, y = coordinates
         plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='o')
+
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
     plt.title("C-space")
@@ -92,14 +92,6 @@ def make_C_space():
     end = time.time()
     print(f"{end - start :.5f} sec")
     plt.show()
- 
-
-
-
-
-
-
-
 
 
 def pairs(points):
@@ -124,7 +116,7 @@ if __name__ == '__main__':
     start = time.time()
 
     # collision check for N time
-    for i in range(1000):
+    for i in range(3000):
         run_random_angle()
 
     end = time.time()
