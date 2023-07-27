@@ -90,12 +90,12 @@ for i in range(10):
 
     if collide_1 or collide_2:
         collision = [1]
-        collision_true.append(q)
-        result.append(collision)
+        collision_true= np.append(q)
+        result = np.append(collision)
     else:
         collision = [0]
-        collision_false.append(q)
-        result.append(collision)
+        collision_false = np.append(q)
+        result = np.append(collision)
     
     collision_true = np.reshape(collision_true, (-1, 2))
     collision_false = np.reshape(collision_false, (-1, 2))
