@@ -31,7 +31,7 @@ X_s = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(1000):
+    for i in range(5):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         
@@ -84,21 +84,20 @@ def run_random_angle():
     X = np.array(X_s)
     X = np.reshape(X, (-1, 2))
     y = np.array(result)
-    # print(X_s)
-    # print(y)
+
 
 
 def make_C_space():
 
-    plt.scatter([], [], color='RED', marker='s', label='collision_true')
-    plt.scatter([], [], color='BLUE', marker='o', label='collision_false')
+    plt.scatter([], [], color='BLUE', marker='s', label='collision_true')
+    plt.scatter([], [], color='RED', marker='o', label='collision_false')
 
     for coordinates in collision_true:
         x, y = coordinates
-        plt.scatter(x, y, color='RED', s=10, alpha=0.5, marker='s')
+        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='s')
     for coordinates in collision_false:
         x, y = coordinates
-        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='o')
+        plt.scatter(x, y, color='RED', s=10, alpha=0.5, marker='o')
 
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")
@@ -106,13 +105,15 @@ def make_C_space():
     plt.legend()
     plt.show()
 
+
+def svm_c_space():
     X = np.array(X_s)
     X = np.reshape(X, (-1, 2))
     y = np.array(result)
 
     svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
     svm.fit(X, y)
-    # plot_decision_regions(X, y, classifier=svm)
+    plot_decision_regions(X, y, classifier=svm)
     plt.legend(loc='upper left')
     plt.tight_layout()
     plt.show()
@@ -135,8 +136,8 @@ def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
-    markers = ('s', 'x', 'o', '^', 'v')
-    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
+    markers = ('o', 's')
+    colors = ('red', 'blue')
     cmap = ListedColormap(colors[:len(np.unique(y))])
 
     x1_min, x1_max = X[:, 0].min() - 1, X[:, 0].max() + 1
@@ -172,3 +173,4 @@ if __name__ == '__main__':
 
     # make C-space graph
     make_C_space()
+    svm_c_space()

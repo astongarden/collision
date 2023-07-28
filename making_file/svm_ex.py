@@ -33,7 +33,7 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         
 
 np.random.seed(1)
-X_xor = np.random.randn(50000, 2)
+X_xor = np.random.randn(5, 2)
 y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
 
 y_xor = np.where(y_xor, 1, -1)
@@ -55,7 +55,7 @@ plt.tight_layout()
 plt.show()
 
 start = time.time()
-svm = SVC(kernel='rbf', random_state=1, gamma=1, C=1.0)
+svm = SVC(kernel='rbf', random_state=1, gamma=0.1, C=10)
 svm.fit(X_xor, y_xor)
 plot_decision_regions(X_xor, y_xor,
                       classifier=svm)
@@ -65,3 +65,6 @@ plt.tight_layout()
 end = time.time()
 plt.show()
 print(f"{end - start :.5f} sec")
+
+print(X_xor)
+print(y_xor)
