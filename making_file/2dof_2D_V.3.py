@@ -31,7 +31,7 @@ X_s = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(5):
+    for i in range(10):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         
@@ -107,6 +107,8 @@ def make_C_space():
 
 
 def svm_c_space():
+    start = time.time()
+
     X = np.array(X_s)
     X = np.reshape(X, (-1, 2))
     y = np.array(result)
@@ -116,6 +118,8 @@ def svm_c_space():
     plot_decision_regions(X, y, classifier=svm)
     plt.legend(loc='upper left')
     plt.tight_layout()
+    end = time.time()
+    print(f"{end - start :.5f} sec")
     plt.show()
 
 
@@ -162,15 +166,9 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 # run code 
 if __name__ == '__main__':
 
-    # start = time.time()
-
     # collision check for N time
     run_random_angle()
-
-    # end = time.time()
-    # check time
-    # print(f"{end - start :.5f} sec")
-
     # make C-space graph
     make_C_space()
+    # make svm_C-space graph
     svm_c_space()
