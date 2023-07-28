@@ -125,8 +125,8 @@ if __name__ == '__main__':
     run_random_angle()
 
     end = time.time()
-    # # check time
-    # print(f"{end - start :.5f} sec")
+    # check time
+    print(f"{end - start :.5f} sec")
 
     # make C-space graph
     make_C_space()
