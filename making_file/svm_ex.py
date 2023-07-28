@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 import numpy as np
 from sklearn.svm import SVC
+import time
 
 def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
 
@@ -32,13 +33,10 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         
 
 np.random.seed(1)
-X_xor = np.random.randn(5, 2)
-y_xor = np.logical_xor(X_xor[:, 0] > 0,
-                       X_xor[:, 1] > 0)
-y_xor = np.where(y_xor, 1, -1)
+X_xor = np.random.randn(50000, 2)
+y_xor = np.logical_xor(X_xor[:, 0] > 0, X_xor[:, 1] > 0)
 
-print(X_xor)
-print(y_xor)
+y_xor = np.where(y_xor, 1, -1)
 
 plt.scatter(X_xor[y_xor == 1, 0],
             X_xor[y_xor == 1, 1],
@@ -56,12 +54,14 @@ plt.legend(loc='best')
 plt.tight_layout()
 plt.show()
 
-        
-svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
+start = time.time()
+svm = SVC(kernel='rbf', random_state=1, gamma=1, C=1.0)
 svm.fit(X_xor, y_xor)
 plot_decision_regions(X_xor, y_xor,
                       classifier=svm)
  
 plt.legend(loc='upper left')
 plt.tight_layout()
+end = time.time()
 plt.show()
+print(f"{end - start :.5f} sec")
