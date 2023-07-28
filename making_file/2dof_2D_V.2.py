@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle, Polygon
 import ast
+from sklearn import svm
 from sklearn.svm import SVC
 from matplotlib.colors import ListedColormap
 
@@ -29,7 +30,7 @@ result = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(10):
+    for i in range(100):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         q = [q1_rad] + [q2_rad]
@@ -63,8 +64,6 @@ def run_random_angle():
             collision = [0]
             collision_false.append(q)
             result.append(collision)
-        
-        
 
         # # show robot link
         # fig, ax = plt.subplots()
@@ -75,6 +74,7 @@ def run_random_angle():
         # ax.set_xlim(-300, 300)
         # ax.set_ylim(-300, 300)
         # plt.show()
+
 
 
 def make_C_space():
@@ -97,17 +97,6 @@ def make_C_space():
     end = time.time()
     print(f"{end - start :.5f} sec")
     plt.show()
-    
-
-    collision_result = np.reshape((collision_true + collision_false), (-1, 2))
-
-    svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
-    collision_result = collision_true + collision_false
-    svm.fit(collision_result, result)
-    plot_decision_regions(collision_result, result, classifier=svm)
-    plt.legend(loc='upper left')
-    plt.tight_layout()
-    plt.show()
 
 
 def pairs(points):
@@ -125,34 +114,6 @@ def line(start, end, color=BLACK, camera=(0, 0)):
     ()
 def add(p1, p2):
     return p1[0] + p2[0], p1[1] + p2[1]
-
-def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
-
-    # setup marker generator and color map
-    markers = ('o', 's', '^', 'v', '<')
-    colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
-    cmap = ListedColormap(colors[:len(np.unique(y))])
-
-    # plot the decision surface
-    x1_min, x1_max = X[:][0].min() - 1, X[:][0].max() + 1
-    x2_min, x2_max = X[:][1].min() - 1, X[:][1].max() + 1
-    xx1, xx2 = np.meshgrid(np.arange(x1_min, x1_max, resolution),
-                           np.arange(x2_min, x2_max, resolution))
-    lab = classifier.predict(np.array([xx1.ravel(), xx2.ravel()]).T)
-    lab = lab.reshape(xx1.shape)
-    plt.contourf(xx1, xx2, lab, alpha=0.3, cmap=cmap)
-    plt.xlim(xx1.min(), xx1.max())
-    plt.ylim(xx2.min(), xx2.max())
-
-    # plot class examples
-    for idx, cl in enumerate(np.unique(y)):
-        plt.scatter(x=X[y == cl, 0], 
-                    y=X[y == cl, 1],
-                    alpha=0.8, 
-                    c=colors[idx],
-                    marker=markers[idx], 
-                    label=f'Class {cl}', 
-                    edgecolor='black')
 
 
 # run code 

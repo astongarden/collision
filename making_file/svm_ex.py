@@ -32,10 +32,13 @@ def plot_decision_regions(X, y, classifier, test_idx=None, resolution=0.02):
         
 
 np.random.seed(1)
-X_xor = np.random.randn(10, 2)
+X_xor = np.random.randn(5, 2)
 y_xor = np.logical_xor(X_xor[:, 0] > 0,
                        X_xor[:, 1] > 0)
 y_xor = np.where(y_xor, 1, -1)
+
+print(X_xor)
+print(y_xor)
 
 plt.scatter(X_xor[y_xor == 1, 0],
             X_xor[y_xor == 1, 1],
