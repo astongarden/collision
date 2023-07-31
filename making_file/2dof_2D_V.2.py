@@ -30,7 +30,7 @@ result = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(100):
+    for i in range(5000):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         q = [q1_rad] + [q2_rad]
@@ -80,15 +80,15 @@ def run_random_angle():
 def make_C_space():
     start = time.time()
 
-    plt.scatter([], [], color='RED', s=10, alpha=0.5, marker='s', label='collision_true')
-    plt.scatter([], [], color='BLUE', s=10, alpha=0.5, marker='o', label='collision_false')
+    plt.scatter([], [], color='BLUE', s=10, alpha=0.5, marker='s', label='collision_true')
+    plt.scatter([], [], color='RED', s=10, alpha=0.5, marker='o', label='collision_false')
 
     for coordinates in collision_true:
         x, y = coordinates
-        plt.scatter(x, y, color='RED', s=10, alpha=0.5, marker='s')
+        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='s')
     for coordinates in collision_false:
         x, y = coordinates
-        plt.scatter(x, y, color='BLUE', s=10, alpha=0.5, marker='o')
+        plt.scatter(x, y, color='RED', s=10, alpha=0.5, marker='o')
 
     plt.xlabel("joint 1 angle(q1, degrees)")
     plt.ylabel("joint 2 angle(q2, degrees)")

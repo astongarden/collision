@@ -8,6 +8,8 @@ from matplotlib.patches import Rectangle, Circle, Polygon
 from matplotlib.colors import ListedColormap
 from sklearn.svm import SVC
 from mlxtend.plotting import plot_decision_regions
+# from sklearn.linear_model import LogisticRegression
+
 
 # color
 BLACK = (  0,   0,   0)
@@ -27,7 +29,6 @@ collision_true = []
 collision_false = []
 result = []
 X_s = []
-
 
 # calculate collision with circle obstacle
 def run_random_angle():
@@ -65,22 +66,23 @@ def run_random_angle():
             collision_true.append(q)
             result.append(collision)
         else:
-            collision = -1
+            collision = 0
             collision_false.append(q)
             result.append(collision)
         
         X_s.append(q1_rad)
         X_s.append(q2_rad)
         
-        # # show robot link
-        # fig, ax = plt.subplots()
-        # body = Polygon(link_1)
-        # ax.add_patch(body)
-        # body = Polygon(link_2)
-        # ax.add_patch(body)
-        # ax.set_xlim(-300, 300)
-        # ax.set_ylim(-300, 300)
-        # plt.show()
+    # show robot link
+
+    # fig, ax = plt.subplots()
+    # body = Polygon(link_1)
+    # ax.add_patch(body)
+    # body = Polygon(link_2)
+    # ax.add_patch(body)
+    # ax.set_xlim(-300, 300)
+    # ax.set_ylim(-300, 300)
+    # plt.show()
 
 
 def make_C_space():
@@ -103,19 +105,21 @@ def make_C_space():
 
 
 def svm_map():
-    start = time.time()
+
+    svm = SVC(kernel='rbf', random_state=1, C=10, gamma=0.001)
 
     X = np.array(X_s)
     X = np.reshape(X, (-1, 2))
     y = np.array(result)
 
-    svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
     svm.fit(X, y)
 
     # Plotting decision regions
-    plot_decision_regions(X, y, clf=svm, legend=2)
+    plot_decision_regions(X=X, y=y, clf=svm)
+
     # Adding axes annotations
     plt.show()
+
 
 def pairs(points):
     for i, j in enumerate(range(-1, len(points) - 1)):

@@ -16,7 +16,7 @@ RED   = (255,   0,   0)
 robot_link1 = 150
 robot_link2 = 100
 robot_thickness = 40
-obstacle = ((50, 100), 30)
+obstacle = ((50, 150), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
 
 def file_clear():
@@ -47,6 +47,8 @@ def run_all_angle():
             r1 = np.array(([math.cos(q1), -math.sin(q1)], [math.sin(q1), math.cos(q1)]))
             link1_ro = np.matmul(r1, link1_1.T)
             link_1 = (link1_ro.T)
+
+
 
             link2_1 = np.array(([0, robot_thickness/2], [0, -robot_thickness/2], [robot_link2, -robot_thickness/2], [robot_link2, robot_thickness/2]))
             r2 = np.array(([math.cos(q2), -math.sin(q2)], [math.sin(q2), math.cos(q2)]))
@@ -158,3 +160,12 @@ if __name__ == '__main__':
     file_clear()
     run_all_angle()
     C_space()
+
+
+
+
+# 결과값이 이상하게 나온다
+# joint2값이 180도 증가한 결과 출력
+# (실제 정답 : 100도 --> 파일 결과 : 280도 그래프 출력)
+# joint1값은 문제없음
+# 이유 못찾음...

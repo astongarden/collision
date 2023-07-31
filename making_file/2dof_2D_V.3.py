@@ -31,7 +31,7 @@ X_s = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(10):
+    for i in range(100):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         
