@@ -1,14 +1,10 @@
 import gjk
 import math
-import time
-import ast
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle, Circle, Polygon
-from matplotlib.colors import ListedColormap
 from sklearn.svm import SVC
 from mlxtend.plotting import plot_decision_regions
-# from sklearn.linear_model import LogisticRegression
 
 
 # color
