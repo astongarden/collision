@@ -6,7 +6,6 @@ from matplotlib.patches import Rectangle, Circle, Polygon
 from sklearn.svm import SVC
 from mlxtend.plotting import plot_decision_regions
 
-
 # color
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -17,7 +16,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 40
+robot_thickness = 20
 obstacle = ((50, 100), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
 
@@ -29,7 +28,7 @@ X_s = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(1000):
+    for i in range(500):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         
@@ -113,8 +112,29 @@ def svm_map():
     # Plotting decision regions
     plot_decision_regions(X=X, y=y, clf=svm)
 
-    # Adding axes annotations
     plt.show()
+
+
+    # import itertools
+    # import matplotlib.gridspec as gridspec
+    # gs = gridspec.GridSpec(2, 2)
+
+    # c10_g0001 = SVC(kernel='rbf', random_state=1, C=10, gamma=0.001)
+    # c10_g01 = SVC(kernel='rbf', random_state=1, C=10, gamma=0.1)
+    # c01_g0001 = SVC(kernel='rbf', random_state=1, C=0.1, gamma=0.001)
+    # c01_g01 = SVC(kernel='rbf', random_state=1, C=0.1, gamma=0.1)
+
+    # labels = ['c10_g0001', 'c10_g01', 'c01_g0001', 'c01_g01']
+
+    # for clf, lab, grd in zip([c10_g0001, c10_g01, c01_g0001, c01_g01],
+    #                      labels,
+    #                      itertools.product([0, 1], repeat=2)):
+    #     clf.fit(X, y)
+    #     ax = plt.subplot(gs[grd[0], grd[1]])
+    #     fig = plot_decision_regions(X=X, y=y, clf=clf, legend=2)
+    #     plt.title(lab)
+
+    # plt.show()
 
 
 def pairs(points):
@@ -140,6 +160,6 @@ if __name__ == '__main__':
     # collision check for N time
     run_random_angle()
     # make C-space graph
-    make_C_space()
+    # make_C_space()
     # make svm_C-space graph
     svm_map()

@@ -19,7 +19,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 40
+robot_thickness = 20
 obstacle = ((50, 100), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
 
@@ -130,3 +130,5 @@ if __name__ == '__main__':
 
     # make C-space graph
     make_C_space()
+
+# 2차원 평면의 2DoF C-space 그리기

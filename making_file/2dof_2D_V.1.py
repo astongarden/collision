@@ -15,7 +15,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 40
+robot_thickness = 20
 obstacle = ((50, 150), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
 

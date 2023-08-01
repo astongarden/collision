@@ -15,7 +15,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 20
+robot_thickness = 2
 obstacle = ((50, 100), 30)
 # obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
@@ -257,3 +257,7 @@ if __name__ == '__main__':
             obstacle = float(input("choice(circle : 1, random rectangle : 2)\n"))
 
     C_space()
+
+
+# 로봇팔의 위치가 잘못된 결과 나타난다.
+# q1이 변화하더라고 q2=0이면 link2가 x축과 수평(잘못된 결과)

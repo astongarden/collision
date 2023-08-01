@@ -18,7 +18,7 @@ RED   = (255,   0,   0)
 # information of test environment
 robot_link1 = 150
 robot_link2 = 100
-robot_thickness = 40
+robot_thickness = 20
 obstacle = ((50, 100), 30)
 # obstacle = ((np.random.randint(10, 200),np.random.randint(10, 200)), np.random.randint(10, 50))
 
@@ -113,7 +113,7 @@ def svm_c_space():
     X = np.reshape(X, (-1, 2))
     y = np.array(result)
 
-    svm = SVC(kernel='rbf', random_state=1, gamma=0.10, C=10.0)
+    svm = SVC(kernel='rbf', random_state=1, gamma=0.001, C=10.0)
     svm.fit(X, y)
     plot_decision_regions(X, y, classifier=svm)
     plt.legend(loc='upper left')
@@ -172,3 +172,6 @@ if __name__ == '__main__':
     make_C_space()
     # make svm_C-space graph
     svm_c_space()
+
+
+# 시간이 오래걸린다.
