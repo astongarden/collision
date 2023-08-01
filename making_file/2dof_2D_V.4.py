@@ -163,3 +163,8 @@ if __name__ == '__main__':
     # make_C_space()
     # make svm_C-space graph
     svm_map()
+
+
+
+# mlxtend.plotting 라이브러리의 plot_decision_regions 이용
+# 경계면을 그리는 속도 단축

@@ -131,4 +131,6 @@ if __name__ == '__main__':
     # make C-space graph
     make_C_space()
 
-# 2차원 평면의 2DoF C-space 그리기
+
+
+# 랜덤 데이터를 이용해 2차원 평면의 2DoF C-space 그리기
