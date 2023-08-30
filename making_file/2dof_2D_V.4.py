@@ -28,7 +28,7 @@ X_s = []
 # calculate collision with circle obstacle
 def run_random_angle():
 
-    for i in range(500):
+    for i in range(129600):
         q1_rad = (np.random.rand(1)[0] * 360)
         q2_rad = (np.random.rand(1)[0] * 360)
         
@@ -160,7 +160,7 @@ if __name__ == '__main__':
     # collision check for N time
     run_random_angle()
     # make C-space graph
-    # make_C_space()
+    make_C_space()
     # make svm_C-space graph
     svm_map()
 
